@@ -14,8 +14,10 @@
                     <h3 class="font-semibold text-lg mb-4">Tambah Mahasiswa</h3>
                     <form method="POST" action="{{ route('mahasiswa.store') }}">
                         @csrf
-                        <input type="text" name="nama" placeholder="Nama" class="border px-4 py-2 mb-2 w-full" />
-                        <input type="text" name="nim" placeholder="NIM" class="border px-4 py-2 mb-2 w-full" />
+                        <input type="text" name="nama" placeholder="Nama"
+                        class="border px-4 py-2 mb-2 w-full" />
+                        <input type="text" name="nim" placeholder="NIM"
+                        class="border px-4 py-2 mb-2 w-full" />
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
                     </form>
                 </div>
