@@ -30,15 +30,25 @@
                     <table class="table-auto w-full border">
                         <thead>
                             <tr class="bg-gray-200">
+                                <th class="border px-4 py-2 w-16 text-center">No</th>
                                 <th class="border px-4 py-2">Nama</th>
                                 <th class="border px-4 py-2">NIM</th>
+                                <th class="border px-4 py-2 w-40 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($data as $mhs)
                                 <tr>
+                                    <td class="border px-4 py-2 text-center">{{ $loop->iteration }}</td>
                                     <td class="border px-4 py-2">{{ $mhs->nama }}</td>
                                     <td class="border px-4 py-2">{{ $mhs->nim }}</td>
+                                    <td class="border px-4 py-2 text-center">
+                                        <form method="POST" action="{{ route('mahasiswa.edit', $mhs->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded"
+                                                onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                        </form>
                                 </tr>
                             @endforeach
                         </tbody>
