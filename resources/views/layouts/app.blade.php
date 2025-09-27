@@ -27,10 +27,35 @@
                 </header>
             @endisset
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <!-- BODY: Sidebar + Konten -->
+            <div class="flex">
+                <!-- Sidebar -->
+                <aside class="w-64 bg-white border-r shadow-sm min-h-screen">
+                    <nav class="p-4 space-y-1">
+                        <a href="{{ route('dashboard') }}"
+                           class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('dashboard') ? 'bg-gray-200 font-bold' : '' }}">
+                            Dashboard
+                        </a>
+                        <a href="{{ route('mahasiswa.index') }}"
+                           class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('mahasiswa.*') ? 'bg-gray-200 font-bold' : '' }}">
+                            Mahasiswa
+                        </a>
+                        <a href="{{ route('ruangan.index') }}"
+                           class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('ruangan.*') ? 'bg-gray-200 font-bold' : '' }}">
+                            Ruangan
+                        </a>
+                        <a href="{{ route('dosen.index') }}"
+                           class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('dosen.*') ? 'bg-gray-200 font-bold' : '' }}">
+                            Dosen
+                        </a>
+                    </nav>
+                </aside>
+                <!-- Konten Utama -->
+                <main class="flex-1 p-6">
+                    {{ $slot ?? '' }}
+                    @yield('content')
+                </main>
+            </div>
         </div>
     </body>
 </html>
