@@ -43,7 +43,7 @@
                                     <td class="border px-4 py-2">{{ $mhs->nama }}</td>
                                     <td class="border px-4 py-2">{{ $mhs->nim }}</td>
                                     <td class="border px-4 py-2 text-center">
-                                        <form method="POST" action="{{ route('mahasiswa.edit', $mhs->id) }}">
+                                        <form method="POST" action="{{ route('mahasiswa.destroy', $mhs->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded"
