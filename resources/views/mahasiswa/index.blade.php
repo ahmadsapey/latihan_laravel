@@ -18,6 +18,13 @@
                         class="border px-4 py-2 mb-2 w-full" />
                         <input type="text" name="nim" placeholder="NIM"
                         class="border px-4 py-2 mb-2 w-full" />
+
+                        <select name="kelas_id" class="border-gray-300 rounded-md w-full">
+                            <option value="">Pilih Kelas</option>
+                            @foreach($kelas as $kls)
+                                <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
+                            @endforeach
+                        </select>
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
                     </form>
                 </div>
@@ -33,6 +40,7 @@
                                 <th class="border px-4 py-2 w-16 text-center">No</th>
                                 <th class="border px-4 py-2">Nama</th>
                                 <th class="border px-4 py-2">NIM</th>
+                                <th class="border px-4 py-2">Kelas</th>
                                 <th class="border px-4 py-2 w-40 text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -42,6 +50,7 @@
                                     <td class="border px-4 py-2 text-center">{{ $loop->iteration }}</td>
                                     <td class="border px-4 py-2">{{ $mhs->nama }}</td>
                                     <td class="border px-4 py-2">{{ $mhs->nim }}</td>
+                                    <td class="border px-4 py-2">{{ $mhs->kelas->nama_kelas ?? '-' }}</td>
                                     <td class="border px-4 py-2 text-center">
                                         <form method="POST" action="{{ route('mahasiswa.destroy', $mhs->id) }}">
                                             @csrf
