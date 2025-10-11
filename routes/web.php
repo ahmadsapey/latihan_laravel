@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\StudentRegisterController;
+use App\Http\Controllers\Auth\StudentRegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
