@@ -28,12 +28,12 @@ class StudentRegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'student', // Set role to student
+            'role' => 'user', // Set role to student
         ]);
 
         Auth::login($user);
 
-        return redirect()->route('student.dashboard') // Redirect to student dashboard
+        return redirect()->route('ekyc.step1') // Redirect to student dashboard
         ->with('success', 'Registration successful. Welcome!');
     }
 }

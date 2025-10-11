@@ -12,7 +12,7 @@
             </div>
         @endif
 
-        <form action="POST" action="{{ route('register.mahasiswa') }}">
+        <form method="POST" action="{{ route('register.mahasiswa') }}">
             @csrf
             
             <div class="mb-4">
@@ -22,7 +22,7 @@
 
             <div class="mb-4">
                 <label for="" class="block text-sm font-medium mb-1">Email</label>
-                <input type="email" name="email" class="border border-gray-300 rounded-md px-3 py-2 w-full" required>
+                <input type="email" name="email" class="border border-gada erorr di Route [student.dashboard] not defined.ray-300 rounded-md px-3 py-2 w-full" required>
             </div>
 
             <div class="mb-4">
