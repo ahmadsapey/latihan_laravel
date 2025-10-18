@@ -1,60 +1,72 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
-use App\Models\Kelas; // Pastikan Anda memiliki model Kelas
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
 {
     public function index()
     {
-        // $data = Mahasiswa::all();
-        // return view('mahasiswa.index', compact('data'));
+        $mahasiswas = Mahasiswa::with('kelas')->orderBy('id', 'desc')->paginate(15);
+        return view('UTS_Laravel.index', compact('mahasiswas'));
+    }
 
-        $data = Mahasiswa::with('kelas')->get();
-        $kelas = Kelas::all(); // Pastikan Anda memiliki model Kelas
-        return view('mahasiswa.index', compact('data', 'kelas'));
+    public function create()
+    {
+        $kelas = Kelas::orderBy('nama_kelas')->get();
+        return view('UTS_Laravel.create', compact('kelas'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama' => 'required|string|max:255',
-            'nim' => 'required|string|max:20|unique:mahasiswa,nim',
-            'kelas_id' => 'nullable|exists:kelas,id', // Validasi untuk kelas_id
+            'nim' => 'required|string|max:50|unique:mahasiswa,nim',
+            'alamat' => 'nullable|string|max:500',
+            'kelas_id' => 'nullable|exists:kelas,id',
         ]);
-        Mahasiswa::create(['nama' => $request->nama,
-        'nim' => $request->nim,
-        'kelas_id' => $request->kelas_id,
-    ]);
-        return redirect()->back()->with('success', 'Data mahasiswa berhasil ditambahkan.');
-        }
 
-        // edit
+        Mahasiswa::create($data);
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
+    }
+
+    public function show($id)
+    {
+        $m = Mahasiswa::with('kelas')->findOrFail($id);
+        return view('UTS_Laravel.show', ['m' => $m]);
+    }
+
     public function edit($id)
     {
-        $mhs = Mahasiswa::findOrFail($id);
-        return view('mahasiswa.edit', compact('mhs'));
+        $m = Mahasiswa::findOrFail($id);
+        $kelas = Kelas::orderBy('nama_kelas')->get();
+        return view('UTS_Laravel.edit', compact('m', 'kelas'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $m = Mahasiswa::findOrFail($id);
+        $data = $request->validate([
             'nama' => 'required|string|max:255',
-            'nim' => 'required|string|max:20|unique:mahasiswa,nim,' . $id,
+            'nim' => "required|string|max:50|unique:mahasiswa,nim,{$id}",
+            'alamat' => 'nullable|string|max:500',
+            'kelas_id' => 'nullable|exists:kelas,id',
         ]);
 
-        $mhs = Mahasiswa::findOrFail($id);
-        $mhs->update($request->only('nama', 'nim'));
-        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diperbarui.');
+        $m->update($data);
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil diperbarui.');
     }
 
-    // delete
     public function destroy($id)
     {
-        $mhs = Mahasiswa::findOrFail($id);
-        $mhs->delete();
-        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil dihapus.');
+        $m = Mahasiswa::findOrFail($id);
+        $m->delete();
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus.');
     }
+
+        
 }
+
