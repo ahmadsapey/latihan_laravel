@@ -15,7 +15,7 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-4">
-                        <label for="" class="block text-gray-700">Namq</label>
+                        <label for="" class="block text-gray-700">Nama</label>
                         <input type="text" name="nama" value="{{ $mahasiswa->nama }}" placeholder="Nama">                        
                         </div>
                         

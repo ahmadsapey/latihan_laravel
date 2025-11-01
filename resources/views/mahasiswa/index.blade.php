@@ -147,13 +147,18 @@
         </div>
     </div>
 
-    @push('scripts')
     <script>
-        document.getElementById('toggleForm').addEventListener('click', function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggleForm');
             const form = document.getElementById('formMahasiswa');
-            form.classList.toggle('hidden');
-            this.textContent = form.classList.contains('hidden') ? 'Tambah Mahasiswa' : 'Tutup Form';
+            
+            toggleBtn.addEventListener('click', function() {
+                form.classList.toggle('hidden');
+                const isHidden = form.classList.contains('hidden');
+                this.innerHTML = isHidden ? 
+                    '<i class="fas fa-plus mr-2"></i>Tambah' : 
+                    '<i class="fas fa-times mr-2"></i>Tutup';
+            });
         });
     </script>
-    @endpush
 </x-app-layout>
