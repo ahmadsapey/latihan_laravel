@@ -113,20 +113,15 @@
                                             {{ $mhs->kelas->nama_kelas ?? '-' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                                            <div class="flex justify-center gap-2">
-                                                <a href="{{ route('mahasiswa.edit', $mhs->id) }}" 
-                                                    class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 
-                                                    transition duration-200">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
+                                            <div class="flex justify-center">
                                                 <form method="POST" action="{{ route('mahasiswa.destroy', $mhs->id) }}" class="inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" 
-                                                        class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 
+                                                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 
                                                         transition duration-200"
                                                         onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                                        <i class="fas fa-trash"></i>
+                                                        <i class="fas fa-trash mr-2"></i>Hapus
                                                     </button>
                                                 </form>
                                             </div>

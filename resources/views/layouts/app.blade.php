@@ -40,13 +40,9 @@
                            class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('mahasiswa.*') ? 'bg-gray-200 font-bold' : '' }}">
                             Mahasiswa
                         </a>
-                        <a href="{{ route('ruangan.index') }}"
-                           class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('ruangan.*') ? 'bg-gray-200 font-bold' : '' }}">
-                            Ruangan
-                        </a>
-                        <a href="{{ route('dosen.index') }}"
-                           class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('dosen.*') ? 'bg-gray-200 font-bold' : '' }}">
-                            Dosen
+                        <a href="{{ route('ekyc.step1') }}"
+                           class="block px-4 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('ekyc.*') ? 'bg-gray-200 font-bold' : '' }}">
+                            Data Pribadi
                         </a>
                     </nav>
                 </aside>

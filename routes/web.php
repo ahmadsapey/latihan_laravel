@@ -4,14 +4,45 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\Auth\StudentRegisterController;
 use App\Http\Controllers\EkycController;
+use App\Models\Mahasiswa;
+use App\Models\Kelas;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Serve dashboard images placed in resources/views/gambar
+Route::get('/dashboard/image/{file}', function ($file) {
+    $path = resource_path('views/gambar/' . $file);
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    return response()->file($path);
+})->name('dashboard.image');
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $mahasiswaCount = Mahasiswa::count();
+    $kelasCount = Kelas::count();
+    $userCount = User::count();
+
+    // Collect images from resources/views/gambar if folder exists
+    $images = [];
+    $dir = resource_path('views/gambar');
+    if (is_dir($dir)) {
+        foreach (scandir($dir) as $file) {
+            $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                $images[] = $file;
+            }
+        }
+    }
+
+    // Masukan berita hari ini
+    $newsText = 'Selamat datang . Hari ini kuliah libur horeeeeeeeee.';
+
+    return view('dashboard', compact('images', 'newsText'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::middleware('auth')->group(function () {
