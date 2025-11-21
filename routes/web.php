@@ -18,11 +18,7 @@ Route::get('/dashboard', function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-        Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
-        Route::post('/mahasiswa', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
-            Route::get('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
-        Route::put('/mahasiswa', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
-        Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+        Route::resource('mahasiswa', MahasiswaController::class);
 
         Route::resource('ruangan', RuanganController::class);
         Route::resource('dosen', DosenController::class);
