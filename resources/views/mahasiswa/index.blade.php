@@ -52,12 +52,14 @@
                                     <td class="border px-4 py-2">{{ $mhs->nim }}</td>
                                     <td class="border px-4 py-2">{{ $mhs->kelas->nama_kelas ?? '-' }}</td>
                                     <td class="border px-4 py-2 text-center">
-                                        <form method="POST" action="{{ route('mahasiswa.destroy', $mhs->id) }}">
+                                        
+                                        <form method="POST" action="{{ route('mahasiswa.destroy', $mhs->id) }}" class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded"
-                                                onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                                onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>    
                                         </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
