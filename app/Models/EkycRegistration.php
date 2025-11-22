@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class EkycRegistration extends Model
 {
-    //
     use HasFactory;
     protected $fillable = [
         'user_id',
@@ -19,6 +18,17 @@ class EkycRegistration extends Model
         'file_kk',
         'file_ijazah',
         'file_selfie',
+        'asal_sd',
+        'asal_smp',
+        'asal_sma',
+        'alamatDomisili',
+        'provinsi',
+        'kota',
+        'kecamatan',
+        'kode_pos',
+        'nama_ibu_kandung',
+        'referensi_sumber',
+        'status',
     ];
 
     // relasi ke table user
@@ -28,3 +38,4 @@ class EkycRegistration extends Model
     }
 
 }
+

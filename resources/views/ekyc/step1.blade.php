@@ -1,52 +1,52 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-            <h2 class="text-2xl font-bold mb-4">eKYC Step 1: data peribadi</h2>
-    
-                @if(session('success'))
-                    <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
-                        {{ session('success') }}
-                    </div>
-                @endif
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow mt-8">
+        <h2 class="text-xl font-semibold mb-4">E-KYC - Langkah 1: Data Pribadi</h2>
 
-                @if ($errors->any())
-                    <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
-                        <ul class="list-disc list-inside">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+        @if (session('success'))
+            <div class="bg-green-100 text-green-700 p-3 mb-4 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
 
-            <form method="POST" action="{{ route('ekyc.storeStep1') }}">
-                @csrf
+        @if ($errors->any())
+            <div class="bg-red-100 text-red-700 p-3 mb-4 rounded">
+                <ul class="list-disc ml-4 text-sm">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-                <div class="mb-4">
-                    <label for="name" class="block text-gray-700 font-bold mb-2">Name Lengkap</label>
-                    <input type="text" name="name" id="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('name') }}" required>
-                </div>
+        <form action="{{ route('ekyc.storeStep1') }}" method="POST">
+            @csrf
 
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">NIK</label>
-                    <input type="text" name="nik" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="{{ old('nik') }}" required>
-                </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">Nama Lengkap</label>
+                <input type="text" name="nama" value="{{ old('nama', $ekyc->name ?? '') }}" class="w-full border-gray-300 rounded-md p-2">
+            </div>
 
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                    <input type="date" name="tanggal_lahir" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="{{ old('tanggal_lahir') }}" required>
-                </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">NIK</label>
+                <input type="text" name="nik" value="{{ old('nik', $ekyc->nik ?? '') }}" class="w-full border-gray-300 rounded-md p-2">
+            </div>
 
-                <div class="mb-4">
-                    <label for="alamat" class="block text-gray-700 font-bold mb-2">Alamat</label>
-                    <input type="text" name="alamat" id="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('alamat') }}" required>
-                </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">Tanggal Lahir</label>
+                <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', $ekyc->tanggal_lahir ?? '') }}" class="w-full border-gray-300 rounded-md p-2">
+            </div>
 
-                <div class="flex justify-end">
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Lanjut ke Step 2
-                    </button>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">Alamat</label>
+                <textarea name="alamat" rows="3" class="w-full border-gray-300 rounded-md p-2">{{ old('alamat', $ekyc->alamat ?? '') }}</textarea>
+            </div>
 
-                </div>
-
+            <div class="flex justify-end">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Lanjut Step 2 →
+                </button>
+            </div>
+        </form>
+    </div>
 </x-app-layout>
+
